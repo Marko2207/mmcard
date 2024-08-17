@@ -1,0 +1,107 @@
+#----------------------------  Підключаємо бшбліотеки
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import *
+import json
+#---------------------------- Вікно програми
+
+app = QApplication([])
+window = QWidget()
+main_width, main_height = 800, 600 # початкові розміри головного вікна
+window.setWindowTitle("Smart Notes")
+window.resize(main_width,main_height)
+window.setStyleSheet('background-color:rgb(73, 81, 130);  font-size:15px')
+
+#---------------------------
+#        елементи інтерфейсу
+#---------------------------
+text_editor = QTextEdit()          #Введення тексту замітки
+text_editor.setPlaceholderText('Введіть текс...') #
+text_editor.setStyleSheet(' background-color:#CCFFFF;')
+
+list_widget1 = QListWidget()                                        # список заміток
+list_widget1.setStyleSheet(' background-color:#CCFFFF;')
+
+list_widget2 = QListWidget()
+list_widget2.setStyleSheet(' background-color:#CCFFFF;')             # список тегу
+
+text_seacher = QLineEdit()                                     # пошук по тексту
+text_seacher.setPlaceholderText('Введіть текс...')
+
+tag_seacher = QLineEdit()
+tag_seacher.setPlaceholderText('Введіть тег...')
+
+#-----------------------------
+# Кнопки
+# ----------------------------
+make_note = QPushButton()
+make_note.setText("Створити замітку")   
+
+delete_note = QPushButton()
+delete_note.setText("Видалити замітку")
+
+save_note = QPushButton()
+save_note.setText("Зберегти замітку")
+
+add_to_note = QPushButton()
+add_to_note.setText("додати замітку")
+
+unpin_to_note = QPushButton()
+unpin_to_note.setText("відкріпити замітку")
+
+search_for_text = QPushButton()
+search_for_text.setText("шукати замітку")
+
+search_for_tag = QPushButton()
+search_for_tag.setText("шукати тег")
+
+action_theme_btn = QPushButton()
+action_theme_btn.setText("Змінити тему")
+
+#---------------------------------
+#розміщення на макет
+#---------------------------------
+
+row1 = QHBoxLayout()
+row1.addWidget(make_note)
+row1.addWidget(delete_note)
+
+row2 = QHBoxLayout()
+row2.addWidget(add_to_note)
+row2.addWidget(unpin_to_note)
+
+
+
+col1 = QVBoxLayout()
+col1.addWidget(text_editor)
+
+col2 = QVBoxLayout()
+col2.addWidget(QLabel("Список заміток:"))
+col2.addWidget(list_widget1)
+col2.addLayout(row1)
+col2.addWidget(save_note)
+
+col2 = QVBoxLayout()
+col2.addWidget(QLabel("Список тегів:"))
+col2.addWidget(list_widget2)
+col2.addWidget(QLabel("Ввід даних:"))
+col2.addWidget(tag_seacher)
+col2.addWidget(text_seacher)
+col2.addLayout(row2)
+col2.addWidget(search_for_tag)
+col2.addWidget(search_for_text)
+col2.addWidget(action_theme_btn)
+
+#Злиття макетів
+layout_note = QHBoxLayout()
+layout_note.addLayout(col1)
+layout_note.addLayout(col2)
+
+#Макет на екрані
+window.setLayout(layout_note)
+
+
+
+
+#----------------------------
+window.show()
+app.exec_()
